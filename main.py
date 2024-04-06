@@ -98,7 +98,10 @@ def split_string_with_capitals(s):
 
 def get_input():
   try:
-    return sanitize_ansi_escape(input("> ")) # Make sure the player doesn't input ANSI escape sequences, because that'll mess up the display (if the user moves the cursor with ^[A, ^[B, ^[C, or ^[D)
+    return sanitize_ansi_escape(input("> ")) # Make sure the player doesn't input ANSI
+    # escape sequences, because that'll mess up the display (if the user moves the 
+    # cursor with ^[A, ^[B, ^[C, or ^[D)
+
   except KeyboardInterrupt:
     # handle ^C gracefully
     exit()
@@ -113,7 +116,7 @@ def print_stats(player, last_user_input):
 
 
 def print_under(game_map, entities, player):
-  add_to_buffer("-"*os.get_terminal_size().columns)
+  # add_to_buffer("-"*os.get_terminal_size().columns)
 
   display_text = f"Block: {game_map[player.y][player.x]}, Entities: "
   
@@ -141,7 +144,7 @@ def main():
 
   last_user_input = ""
   
-  game_map, color_dict = init('./map.txt')
+  game_map, color_dict = init('./asset/map.txt')
   
   while True:
     display_map = display(game_map, display_map, player, entities)
