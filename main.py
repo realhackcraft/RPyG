@@ -93,9 +93,10 @@ def get_input():
     exit()
 
 def clear_display():
-  for _ in range(os.get_terminal_size().columns): # Clear up the entire screen
-    add_to_buffer("\033[F")  # Move cursor up one line
-    add_to_buffer("\033[K")  # Clear to the end of line
+  add_to_buffer("\033[H\033[J")
+  #for _ in range(os.get_terminal_size().columns): # Clear up the entire screen
+#add_to_buffer("\033[F")  # Move cursor up one line
+#add_to_buffer("\033[K")  # Clear to the end of line
     # Disable flushing to prevent flashing screen
 
 def print_stats(player, last_user_input):
