@@ -9,9 +9,20 @@ from classes.player import Player
 
 buffer = ""
 
+def convert_arrow_keys(input_text):
+  # Replace ANSI escape codes for arrow keys with corresponding WASD keys
+  converted_text = input_text.replace("\x1B[A", "W").replace("\x1B[B", "S").replace("\x1B[C", "D").replace("\x1B[D", "A")
+  return converted_text
 
-def parse_map_header(line):
-  args = line.split(", ") # Split the arguments with comma and space
+def sanitize_ansi_escape(text):
+  text_without_arrow = convert_arrow_keys(text) # Convert the arrow keys before they get removed
+  ansi_escape_pattern = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+  # Replace ANSI escape codes with an empty string
+  sanitized_text = ansi_escape_pattern.sub('', text_without_arrow)
+  return sanitized_text
+
+def parse_map_header(text):
+  args = text.split(", ") # Split the arguments with comma and space
   up = down = left = right = colors = "" 
 
   for arg in args:
@@ -87,17 +98,13 @@ def split_string_with_capitals(s):
 
 def get_input():
   try:
-    return input("> ")
+    return sanitize_ansi_escape(input("> ")) # Make sure the player doesn't input ANSI escape sequences, because that'll mess up the display (if the user moves the cursor with ^[A, ^[B, ^[C, or ^[D)
   except KeyboardInterrupt:
     # handle ^C gracefully
     exit()
 
 def clear_display():
   add_to_buffer("\033[H\033[J")
-  #for _ in range(os.get_terminal_size().columns): # Clear up the entire screen
-#add_to_buffer("\033[F")  # Move cursor up one line
-#add_to_buffer("\033[K")  # Clear to the end of line
-    # Disable flushing to prevent flashing screen
 
 def print_stats(player, last_user_input):
   add_to_buffer("-"*os.get_terminal_size().columns)
