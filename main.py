@@ -7,6 +7,8 @@ from copy import deepcopy
 from classes.entity import Entity
 from classes.player import Player
 
+buffer = ""
+
 
 def parse_map_header(line):
   args = line.split(", ") # Split the arguments with comma and space
@@ -31,7 +33,14 @@ def parse_map_header(line):
 
   return [up, down, left, right, colors]
 
+def add_to_buffer(string, end="\n"):
+  global buffer
+  buffer += string + end
 
+def flush_buffer():
+  global buffer
+  print(buffer, end="")
+  buffer = ""
 
 def init(path):
   print("\033[=3h") # Set display mode to 80x25 with color support
@@ -50,7 +59,6 @@ def init(path):
 
       game_map.append(line.split())
       lines += 1
-    print(colors)
     with open(colors, 'r') as file:
       for line in file:
         # Split each line into key and value based on space
@@ -71,9 +79,9 @@ def display(game_map, display_map, player, entities):
 def print_map(display_map, color_dict):
   for row in display_map:
     for tile in row:
-      print(color_dict[tile] + tile + "\033[0m", end=" ")  # get color of tile
-    print()  # new line
-
+      add_to_buffer(f"{color_dict[tile]}{tile}\033[0m", end=" ") # display the tile with the color and a space at the end
+    add_to_buffer("")
+    
 def split_string_with_capitals(s):
     return re.findall('[a-zA-Z][^A-Z]*', s)
 
@@ -86,17 +94,18 @@ def get_input():
 
 def clear_display():
   for _ in range(os.get_terminal_size().columns): # Clear up the entire screen
-    sys.stdout.write("\033[F")  # Move cursor up one line
-    sys.stdout.write("\033[K")  # Clear to the end of line
+    add_to_buffer("\033[F")  # Move cursor up one line
+    add_to_buffer("\033[K")  # Clear to the end of line
+    # Disable flushing to prevent flashing screen
 
 def print_stats(player, last_user_input):
-  print("-"*os.get_terminal_size().columns)
-  print(f"Wood: {player.inventory['wood']}, Hunger: {player.hunger}, Thirst: {player.thrist}, Last Input: {last_user_input.upper()}")
-  print("-"*os.get_terminal_size().columns)
+  add_to_buffer("-"*os.get_terminal_size().columns)
+  add_to_buffer(f"Wood: {player.inventory['wood']}, Hunger: {player.hunger}, Thirst: {player.thrist}, Last Input: {last_user_input.upper()}")
+  add_to_buffer("-"*os.get_terminal_size().columns)
 
 
 def print_under(game_map, entities, player):
-  print("-"*os.get_terminal_size().columns)
+  add_to_buffer("-"*os.get_terminal_size().columns)
 
   display_text = f"Block: {game_map[player.y][player.x]}, Entities: "
   
@@ -108,7 +117,7 @@ def print_under(game_map, entities, player):
         first = False
       else:
         display_text += f", {e.name}"
-  print(display_text)
+  add_to_buffer(display_text)
 
 
 def main():
@@ -134,6 +143,8 @@ def main():
     print_stats(player, last_user_input)
     print_map(display_map, color_dict)
     
+    flush_buffer()
+
     user_input = get_input()
 
     if user_input == "":
