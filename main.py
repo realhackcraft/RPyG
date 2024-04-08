@@ -5,8 +5,9 @@ from copy import deepcopy
 
 from classes.entity import Entity
 from classes.player import Player
+from utils.displayManager import DisplayManager
 
-buffer = ""
+display_manager = DisplayManager()
 
 def convert_arrow_keys(input_text):
   # Replace ANSI escape codes for arrow keys with corresponding WASD keys
@@ -43,167 +44,117 @@ def parse_map_header(text):
 
   return [up, down, left, right, colors]
 
-def add_to_buffer(string, end="\n"):
-  global buffer
-  buffer += string + end
-
-def flush_buffer():
-  global buffer
-  print(buffer, end="")
-  buffer = ""
-
 def init(path):
-  print("\033[=3h") # Set display mode to 80x25 with color support
-  game_map = []
-  color_dict = {}
+    print("\033[=3h")  # Set display mode to 80x25 with color support
+    game_map = []
+    color_dict = {}
 
-  up = down = left = right = colors = "" 
+    with open(path, "r") as file:
+        for i, line in enumerate(file):
+            if i == 0:
+                up, down, left, right, colors = parse_map_header(line)
+                continue
+            game_map.append(line.split())
 
-  with open(path, "r") as file:
-    lines = 0
-    for i, line in enumerate(file):
-      if lines == 0:
-         up, down, left, right, colors = parse_map_header(line)
-         lines += 1 # Make sure the line gets incresed because the other lines += 1 code doesn't get run when lines == 1
-         continue
+    with open(colors, 'r') as color_file:
+        for line in color_file:
+            key, value = line.strip().split(' ')
+            color_dict[key] = f"\033[{value}m"
 
-      game_map.append(line.split())
-      lines += 1
-    with open(colors, 'r') as file:
-      for line in file:
-        # Split each line into key and value based on space
-        key, value = line.strip().split(' ')
-        # Add key-value pair to the dictionarycolor_dict
-        color_dict[key] = f"\033[{value}m"
-  return [game_map, color_dict]
+    return [game_map, color_dict]
 
 def display(game_map, display_map, player, entities):
-  display_map = deepcopy(game_map)
+    display_map = deepcopy(game_map)
 
-  for e in entities:
-    display_map[e.y][e.x] = e.symbol
-  
-  display_map[player.y][player.x] = player.symbol
-  return display_map
+    for e in entities:
+        display_map[e.y][e.x] = e.symbol
+
+    display_map[player.y][player.x] = player.symbol
+    return display_map
 
 def print_map(display_map, color_dict):
-  for row in display_map:
-    for tile in row:
-      add_to_buffer(f"{color_dict[tile]}{tile}\033[0m", end=" ") # display the tile with the color and a space at the end
-    add_to_buffer("")
-    
+    for row in display_map:
+        display_manager.add_to_buffer(" ".join([f"{color_dict[tile]}{tile}\033[0m" for tile in row]))
+
 def split_string_with_capitals(s):
     return re.findall('[a-zA-Z][^A-Z]*', s)
 
 def get_input():
-  try:
-    return sanitize_ansi_escape(input("> ")) # Make sure the player doesn't input ANSI
-    # escape sequences, because that'll mess up the display (if the user moves the 
-    # cursor with ^[A, ^[B, ^[C, or ^[D)
-
-  except KeyboardInterrupt:
-    # handle ^C gracefully
-    exit()
+    try:
+        return sanitize_ansi_escape(input("> "))
+    except KeyboardInterrupt:
+        exit()
 
 def clear_display():
-  add_to_buffer("\033[H\033[J")
+    display_manager.add_to_buffer("\033[H\033[J")
 
 def print_stats(player, last_user_input):
-  add_to_buffer("-"*os.get_terminal_size().columns)
-  add_to_buffer(f"Wood: {player.inventory['wood']}, Hunger: {player.hunger}, Thirst: {player.thrist}, Last Input: {last_user_input.upper()}")
-  add_to_buffer("-"*os.get_terminal_size().columns)
-
+    display_manager.add_to_buffer("-" * os.get_terminal_size().columns)
+    display_manager.add_to_buffer(f"Wood: {player.inventory['wood']}, Hunger: {player.hunger}, Thirst: {player.thrist}, Last Input: {last_user_input.upper()}")
+    display_manager.add_to_buffer("-" * os.get_terminal_size().columns)
 
 def print_under(game_map, entities, player):
-  # add_to_buffer("-"*os.get_terminal_size().columns)
-
-  display_text = f"Block: {game_map[player.y][player.x]}, Entities: "
-  
-  for e in entities:
-    first = True
-    if e.y == player.y and e.x == player.x:
-      if first:
-        display_text += f"{e.name}"
-        first = False
-      else:
-        display_text += f", {e.name}"
-  add_to_buffer(display_text)
-
+    display_manager.add_to_buffer("-" * os.get_terminal_size().columns)
+    display_text = f"Block: {game_map[player.y][player.x]}, Entities: "
+    for e in entities:
+        if e.y == player.y and e.x == player.x:
+            display_text += f"{e.name}, "
+    display_manager.add_to_buffer(display_text.rstrip(", "))
 
 def main():
+    player = Player(2, 3)
+    entities = []
+    game_map, color_dict = init('./asset/map.txt')
+    last_user_input = ""
 
-  player = Player(2, 3)
+    while True:
+        display_map = display(game_map, [], player, entities)
+        clear_display()
 
-  entities = []
+        print_under(game_map, entities, player)
+        print_stats(player, last_user_input)
+        print_map(display_map, color_dict)
+        display_manager.flush_buffer()
 
-  game_map = []
-  display_map = []
+        user_input = get_input()
 
-  color_dict = {}
+        if user_input == "":
+            user_input = last_user_input
 
-  last_user_input = ""
-  
-  game_map, color_dict = init('./asset/map.txt')
-  
-  while True:
-    display_map = display(game_map, display_map, player, entities)
-    clear_display()
+        last_user_input = user_input
 
-    print_under(game_map, entities, player) # shows what's under the player
-    print_stats(player, last_user_input)
-    print_map(display_map, color_dict)
-    
-    flush_buffer()
+        commands = split_string_with_capitals(user_input)
 
-    user_input = get_input()
-
-    if user_input == "":
-      user_input = last_user_input # repeat last user input if the user presses enter
-    
-    last_user_input = user_input
-
-    commands = split_string_with_capitals(user_input)
-
-    for c in commands:
-      match c.lower():
-        case "w":
-          if player.y > 0:
-            player.y -= 1
-        case "s":
-          if player.y + 1 < len(game_map) - 1: # The length of an array is it's max available index + 1
-            player.y += 1
-        case "a":
-          if player.x > 0:
-            player.x -= 1
-        case "d":
-          if player.x + 1 < len(game_map[player.y]):
-            player.x += 1
-        case "m":
-          current_block = game_map[player.y][player.x]
-          if current_block == "T":
-            if player.hunger > 0 and player.thrist > 0:
-              game_map[player.y][player.x] = "G" # mine the tree
-              player.inventory['wood'] += 1
-              player.hunger -= 1
-              player.thrist -= 1
-          elif current_block == "W":
-            game_map[player.y][player.x] = "R" # drink the water
-            player.thrist += 1
-            if random.getrandbits(2) == 0: # 1/4
-              e = Entity("Salmon", "S", player.x, player.y, 1)
-              entities.append(e)
-        case "e":
-          # check if salmon is on the same positiion as the player
-          if len(entities) > 0:
-            for e in entities:
-              if e.x == player.x and e.y == player.y:
-                e.health -= 1
-                if e.health <= 0:
-                  match e.name:
-                    case "Salmon":
-                      player.hunger += 1
-                  entities.remove(e)
+        for c in commands:
+            if c.lower() == "w" and player.y > 0:
+                player.y -= 1
+            elif c.lower() == "s" and player.y + 1 < len(game_map) - 1:
+                player.y += 1
+            elif c.lower() == "a" and player.x > 0:
+                player.x -= 1
+            elif c.lower() == "d" and player.x + 1 < len(game_map[player.y]):
+                player.x += 1
+            elif c.lower() == "m":
+                current_block = game_map[player.y][player.x]
+                if current_block == "T" and player.hunger > 0 and player.thrist > 0:
+                    game_map[player.y][player.x] = "G"
+                    player.inventory['wood'] += 1
+                    player.hunger -= 1
+                    player.thrist -= 1
+                elif current_block == "W":
+                    game_map[player.y][player.x] = "R"
+                    player.thrist += 1
+                    if random.getrandbits(2) == 0:
+                        e = Entity("Salmon", "S", player.x, player.y, 1)
+                        entities.append(e)
+            elif c.lower() == "e" and len(entities) > 0:
+                for e in entities:
+                    if e.x == player.x and e.y == player.y:
+                        e.health -= 1
+                        if e.health <= 0:
+                            if e.name == "Salmon":
+                                player.hunger += 1
+                            entities.remove(e)
 
 if __name__ == "__main__":
-  main()
-
+    main()
