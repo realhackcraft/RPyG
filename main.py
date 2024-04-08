@@ -1,7 +1,6 @@
 import os
 import random
 import re
-import sys
 from copy import deepcopy
 
 from classes.entity import Entity
