@@ -146,10 +146,10 @@ def main():
       elif c.lower() == "m":
         current_block = game_map[player.y][player.x]
         if current_block == "T" and player.hunger > 0 and player.thrist > 0:
-            game_map[player.y][player.x] = "G"
-            player.inventory['wood'] += 1
-            player.hunger -= 1
-            player.thrist -= 1
+          game_map[player.y][player.x] = "G"
+          player.inventory['wood'] += 1
+          player.hunger -= 1
+          player.thrist -= 1
         elif current_block == "W":
           game_map[player.y][player.x] = "R"
           player.thrist += 1            
