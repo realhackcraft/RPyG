@@ -141,24 +141,28 @@ def main():
         elif up:
           game_map, color_dict, up, down, left, right = init(up) # Load upper map
           player.y = len(game_map) - 1
+          player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bouds
       elif c.lower() == "s":
         if player.y + 1 < len(game_map) - 1:
           player.y += 1
         elif down:
-            game_map, color_dict, up, down, left, right = init(down)
-            player.y = 0
+          game_map, color_dict, up, down, left, right = init(down)
+          player.y = 0
+          player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bouds
       elif c.lower() == "a":
         if player.x > 0:
           player.x -= 1
         elif left:
           game_map, color_dict, up, down, left, right = init(left)
           player.x = 0
+          player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
       elif c.lower() == "d":
         if player.x + 1 < len(game_map[player.y]):
           player.x += 1
         elif right:
           game_map, color_dict, up, down, left, right = init(right)
           player.x = len(game_map[player.y]) - 1
+          player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
       elif c.lower() == "m":
         current_block = game_map[player.y][player.x]
         if current_block == "T" and player.hunger > 0 and player.thrist > 0:
