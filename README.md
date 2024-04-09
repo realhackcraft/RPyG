@@ -6,13 +6,13 @@ RPyG is a role playing game entirely in the tty terminal. It is written in pytho
 
 You can clone this repository and run the game with:
 
-```sh
+```shell
 poetry run python main.py
 ```
 
 Or just 
 
-```sh
+```shell
 python main.py
 ```
 
