@@ -1,0 +1,162 @@
+{
+  "main": {
+    "id": "35a7a17cc66d6618",
+    "type": "split",
+    "children": [
+      {
+        "id": "ff9787765a305ae4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c6d8c86b8afe0627",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "Plan.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2bb049a986d80594",
+    "type": "split",
+    "children": [
+      {
+        "id": "8d439817e9738fef",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "84f1ee08f23e0b56",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2556624b5aedf638",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#canceled",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "5d9f10e6bdef4e01",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c5863def2cf1064e",
+    "type": "split",
+    "children": [
+      {
+        "id": "2c1059627f3b8600",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2219daac1ae9ceec",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Plan.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1981b66ff390737c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Plan.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "89837d739fb48973",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "40276170606030de",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Plan.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "c6d8c86b8afe0627",
+  "lastOpenFiles": [
+    "Plan/Storyline.md",
+    "Plan.md",
+    "Plan/Multi-tile structures.md",
+    "Untitled.md",
+    "Plan",
+    "Untitled Kanban.md",
+    "Plan/Allow movement through arrow keys as well.md",
+    "Plan/Performance.md",
+    "Plan/Chaining Commands.md",
+    "Plan/Performance 1.md",
+    "Plan",
+    "Welcome.md"
+  ]
+}
