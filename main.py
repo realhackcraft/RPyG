@@ -11,11 +11,11 @@ dm = DisplayManager()
 
 def convert_arrow_keys(input_text):
   # Replace ANSI escape codes for arrow keys with corresponding WASD
- input_text = input_text.replace("\x1B[A", "W")
- input_text = input_text.replace("\x1B[B", "S")
- input_text = input_text.replace("\x1B[C", "D")
- input_text = input_text.replace("\x1B[D", "A")
- return input_text
+  input_text = input_text.replace("\x1B[A", "W")
+  input_text = input_text.replace("\x1B[B", "S")
+  input_text = input_text.replace("\x1B[C", "D")
+  input_text = input_text.replace("\x1B[D", "A")
+  return input_text
 
 def sanitize_ansi_escape(text):
   # Convert the arrow keys before they get removed
@@ -156,14 +156,14 @@ def main():
           if random.getrandbits(2) == 0:
             e = Entity("Salmon", "S", player.x, player.y, 1)
             entities.append(e)
-        elif c.lower() == "e" and len(entities) > 0:
-          for e in entities:
-            if e.x == player.x and e.y == player.y:
-              e.health -= 1
-              if e.health <= 0:
-                if e.name == "Salmon":
-                  player.hunger += 1
-                  entities.remove(e)
+      elif c.lower() == "e" and len(entities) > 0:
+        for e in entities:
+          if e.x == player.x and e.y == player.y:
+            e.health -= 1
+            if e.health <= 0:
+              if e.name == "Salmon":
+                player.hunger += 1
+                entities.remove(e)
 
 if __name__ == "__main__":
   main()
