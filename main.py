@@ -64,7 +64,7 @@ def init(path):
         key, value = line.strip().split(' ')
         color_dict[key] = f"\033[{value}m"
 
-  return [game_map, color_dict]
+  return [game_map, color_dict, up, down, left, right]
 
 def display(game_map, display_map, player, entities):
   display_map = deepcopy(game_map)
@@ -113,7 +113,7 @@ def print_under(game_map, entities, player):
 def main():
   player = Player(2, 3)
   entities = []
-  game_map, color_dict = init('./asset/map.txt')
+  game_map, color_dict, up, down, left, right = init('./asset/map.txt')
   last_user_input = ""
 
   while True:
@@ -135,14 +135,30 @@ def main():
     commands = split_string_with_capitals(user_input)
 
     for c in commands:
-      if c.lower() == "w" and player.y > 0:
-        player.y -= 1
-      elif c.lower() == "s" and player.y + 1 < len(game_map) - 1:
-        player.y += 1
-      elif c.lower() == "a" and player.x > 0:
-        player.x -= 1
-      elif c.lower() == "d" and player.x + 1 < len(game_map[player.y]):
-        player.x += 1
+      if c.lower() == "w":
+        if player.y > 0:
+         player.y -= 1
+        elif up:
+          game_map, color_dict, up, down, left, right = init(up) # Load upper map
+          player.y = len(game_map) - 1
+      elif c.lower() == "s":
+        if player.y + 1 < len(game_map) - 1:
+          player.y += 1
+        elif down:
+            game_map, color_dict, up, down, left, right = init(down)
+            player.y = 0
+      elif c.lower() == "a":
+        if player.x > 0:
+          player.x -= 1
+        elif left:
+          game_map, color_dict, up, down, left, right = init(left)
+          player.x = 0
+      elif c.lower() == "d":
+        if player.x + 1 < len(game_map[player.y]):
+          player.x += 1
+        elif right:
+          game_map, color_dict, up, down, left, right = init(right)
+          player.x = len(game_map[player.y]) - 1
       elif c.lower() == "m":
         current_block = game_map[player.y][player.x]
         if current_block == "T" and player.hunger > 0 and player.thrist > 0:
