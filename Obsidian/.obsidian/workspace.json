@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "ff9787765a305ae4",
+        "id": "ac759a08f37b53f2",
         "type": "tabs",
         "children": [
           {
@@ -126,6 +126,14 @@
                 "file": "Plan.md"
               }
             }
+          },
+          {
+            "id": "66070959d0f816fa",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
           }
         ]
       }
@@ -141,14 +149,18 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "workspaces:Manage workspace layouts": false
     }
   },
   "active": "c6d8c86b8afe0627",
   "lastOpenFiles": [
-    "Plan/Storyline.md",
+    "Plan/Title screen.md",
     "Plan.md",
+    "Plan/Storyline.md",
+    "Plan/Random terrain generation.md",
     "Plan/Multi-tile structures.md",
+    "Plan/Refactor Map loading into classes.md",
     "Untitled.md",
     "Plan",
     "Untitled Kanban.md",

@@ -1,27 +1,6 @@
 {
   "hide-tags-in-title": true,
-  "tag-colors": [
-    {
-      "tagKey": "#todo",
-      "color": "rgba(245, 207, 93, 1)",
-      "backgroundColor": "rgba(245, 195, 93, 0.1)"
-    },
-    {
-      "tagKey": "#doing",
-      "color": "rgba(93, 172, 245, 1)",
-      "backgroundColor": "rgba(93, 197, 245, 0.1)"
-    },
-    {
-      "tagKey": "#done",
-      "color": "rgba(93, 245, 113, 1)",
-      "backgroundColor": "rgba(112, 245, 93, 0.1)"
-    },
-    {
-      "tagKey": "#canceled",
-      "color": "rgba(245, 93, 93, 1)",
-      "backgroundColor": "rgba(245, 93, 93, 0.1)"
-    }
-  ],
+  "tag-colors": [],
   "show-relative-date": true,
   "hide-date-in-title": true
 }

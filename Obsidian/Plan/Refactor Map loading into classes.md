@@ -1,0 +1,1 @@
+The map loading process needs to be refactored into classes to allow for easier multi-map loading and structure support.

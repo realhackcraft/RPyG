@@ -6,12 +6,18 @@ kanban-plugin: basic
 
 ## Todo
 
+- [ ] [[Multi-tile structures]]
+- [ ] [[Random terrain generation]]
+- [ ] [[Title screen]]
+- [ ] Saving + loading
 - [ ] [[Storyline]]
-- [ ] Multi-tile structures
+- [ ] Port to C++
+- [ ] Caching maps to save load time
 
 
 ## Doing
 
+- [ ] [[Refactor Map loading into classes]]
 
 
 ## Done
@@ -32,6 +38,6 @@ kanban-plugin: basic
 
 %% kanban:settings
 ```
-{"kanban-plugin":"basic"}
+{"kanban-plugin":"basic","new-note-folder":"Plan","show-checkboxes":true}
 ```
 %%
