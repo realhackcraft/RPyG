@@ -17,12 +17,12 @@ kanban-plugin: basic
 
 ## Doing
 
-- [ ] [[Refactor Map loading into classes]]
 
 
 ## Done
 
 **Complete**
+- [x] [[Refactor Map loading into classes]]
 - [ ] Reduce flicker
 - [ ] Chaining Commands
 - [ ] Allow movement through arrow keys as well
