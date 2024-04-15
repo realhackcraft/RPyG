@@ -23,9 +23,9 @@ kanban-plugin: basic
 
 **Complete**
 - [x] [[Refactor Map loading into classes]]
-- [ ] Reduce flicker
-- [ ] Chaining Commands
-- [ ] Allow movement through arrow keys as well
+- [x] Reduce flicker
+- [x] Chaining Commands
+- [x] Allow movement through arrow keys as well
 
 
 ## Canceled
