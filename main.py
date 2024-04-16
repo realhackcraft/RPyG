@@ -1,5 +1,6 @@
 import random
 import re
+from typing import ForwardRef
 
 
 from classes.entity import Entity
@@ -108,3 +109,4 @@ def main():
 
 if __name__ == "__main__":
   main()
+

@@ -11,9 +11,11 @@
             "id": "c6d8c86b8afe0627",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "Plan.md"
+                "file": "Plan/Multi-tile structures.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -83,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Plan.md",
+                "file": "Plan/Multi-tile structures.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Plan.md",
+                "file": "Plan/Multi-tile structures.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -123,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Plan.md"
+                "file": "Plan/Multi-tile structures.md"
               }
             }
           },
@@ -155,8 +157,8 @@
   },
   "active": "c6d8c86b8afe0627",
   "lastOpenFiles": [
-    "Plan/Title screen.md",
     "Plan.md",
+    "Plan/Title screen.md",
     "Plan/Storyline.md",
     "Plan/Random terrain generation.md",
     "Plan/Multi-tile structures.md",

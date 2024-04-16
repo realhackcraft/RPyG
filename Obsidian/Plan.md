@@ -31,7 +31,7 @@ kanban-plugin: basic
 ## Canceled
 
 **Complete**
-- [ ] Performance
+- [x] Performance
 
 
 

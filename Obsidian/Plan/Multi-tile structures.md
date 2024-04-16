@@ -52,6 +52,5 @@ Attributes:
 | `I`     | Other structures to import                                     |                                                 |
 | `S`     | The symbol that other maps can use to reference this structure |                                                 |
 
-
 Also note that:
 - The structure can embed its colors independently from its map, and therefore allow a map to contain two symbols of different colors.
