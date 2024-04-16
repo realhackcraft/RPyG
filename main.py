@@ -40,6 +40,8 @@ def main():
   game_map = Map("./asset/map.txt", dm)
   last_user_input = ""
 
+  print("\033[=3h")  # Set display mode to 80x25 with color support
+
   while True:
     clear_display()
     game_map.render_map(player, entities, last_user_input)

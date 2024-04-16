@@ -1,38 +1,53 @@
+from copy import deepcopy
+import os
 from typing import List
 
-import os
-
-from copy import deepcopy
-
-from utils.displayManager import DisplayManager
 from classes.entity import Entity
 from classes.player import Player
+from classes.structure import Structure
+from utils.displayManager import DisplayManager
 
 class Map:
-  def __init__(self, path: str, dm: DisplayManager):
-    print("\033[=3h")  # Set display mode to 80x25 with color support
-    game_map: List[List[str]] = []
-    color_dict = {}
+  def __init__(self, path: str, dm: DisplayManager, loadPath: bool = True):
+    self.path = path  
+    self.game_map: List[List[str]] = []
+    self.color_dict = {}
 
     with open(path, "r") as file:
       for i, line in enumerate(file):
         if i == 0:
-          up, down, left, right, colors = self.parse_map_header(line)
+          up, down, left, right, colors, structures = self.parse_map_header(line)
           continue
-        game_map.append(line.split())
-  
+        self.game_map.append(line.split())
+
       with open(colors, 'r') as color_file:
         for line in color_file:
           key, value = line.strip().split(' ')
-          color_dict[key] = f"\033[{value}m"
+          self.color_dict[key] = f"\033[{value}m"
 
     self.dm = dm
-    self.game_map = game_map
-    self.color_dict = color_dict
+
     self.up = up
     self.down = down
     self.left = left
     self.right = right
+
+    self.structures = structures
+
+    if loadPath:
+      if self.up:
+        self.loaded_up = Map(self.up, dm, False)
+      if self.down:
+        self.loaded_down = Map(self.down, dm, False)
+      if self.left:
+        self.loaded_left = Map(self.down, dm, False)
+      if self.right:
+        self.loaded_right = Map(self.down, dm, False)
+      if self.structures:
+        self.loaded_structures = []
+        for structure in self.structures:
+          self.loaded_structures.append(Structure(structure))
+        
 
   def render_map(self, player: Player, entities: List[Entity], last_user_input: str):
     self.display_map = deepcopy(self.game_map)
@@ -72,12 +87,11 @@ class Map:
   @staticmethod
   def parse_map_header(text: str):
     args = text.split(", ") # Split the arguments with comma and space
-    up = down = left = right = colors = "" 
+    up = down = left = right = colors = structures = "" 
 
     for arg in args:
       name = arg[0] # Name of the arg
       arg = arg[3:].strip() # Arg after the name, colon and space
-
       match name:
         case "U":
           up = arg
@@ -89,8 +103,10 @@ class Map:
           right = arg
         case "C":
           colors = arg
+        case "S":
+          structures = arg.split(": ")
 
-    return [up, down, left, right, colors]
+    return [up, down, left, right, colors, structures]
 
   def __getitem__(self, index: int):
     return self.game_map[index]
