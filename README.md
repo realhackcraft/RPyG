@@ -19,9 +19,6 @@ python main.py
 (However the latter method is not perfered as it might break without warning 
 in future updates.)
 
-You can also fork this game on [replit](https://replit.com/@realhackcraft/RPyG)
-and run it there.
-
 ## Compatibility
 
 Compatibility with old or budget systems is our topmost priority. We are using
