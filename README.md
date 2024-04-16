@@ -4,20 +4,11 @@ RPyG is a role playing game entirely in the tty terminal. It is written in pytho
 
 ## Installation
 
-You can clone this repository and run the game with:
-
-```shell
-poetry run python main.py
-```
-
-Or just 
+You can clone this repository and run the game with: 
 
 ```shell
 python main.py
 ```
-
-(However the latter method is not perfered as it might break without warning 
-in future updates.)
 
 ## Compatibility
 
