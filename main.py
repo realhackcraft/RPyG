@@ -1,7 +1,5 @@
 import random
 import re
-from typing import ForwardRef
-
 
 from classes.entity import Entity
 from classes.player import Player
@@ -57,55 +55,57 @@ def main():
     commands = StringUtils.split_string_with_capitals(user_input)
 
     for c in commands:
-      if c.lower() == "w":
-        if player.y > 0:
-         player.y -= 1
-        elif game_map.up:
-          game_map = Map(game_map.up, dm) # Load upper map
-          player.y = len(game_map) - 1
-          player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bouds
-      elif c.lower() == "s":
-        if player.y + 1 < len(game_map) - 1:
-          player.y += 1
-        elif game_map.down:
-          game_map = Map(game_map.down, dm)
-          player.y = 0
-          player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bouds
-      elif c.lower() == "a":
-        if player.x > 0:
-          player.x -= 1
-        elif game_map.left:
-          game_map = Map(game_map.left, dm)
-          player.x = 0
-          player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
-      elif c.lower() == "d":
-        if player.x + 1 < len(game_map[player.y]):
-          player.x += 1
-        elif game_map.right:
-          game_map = Map(game_map.right, dm)
-          player.x = len(game_map[player.y]) - 1
-          player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
-      elif c.lower() == "m":
-        current_block = game_map[player.y][player.x]
-        if current_block == "T" and player.hunger > 0 and player.thrist > 0:
-          game_map[player.y][player.x] = "G"
-          player.inventory['wood'] += 1
-          player.hunger -= 1
-          player.thrist -= 1
-        elif current_block == "W":
-          game_map[player.y][player.x] = "R"
-          player.thrist += 1            
-          if random.getrandbits(2) == 0:
-            e = Entity("Salmon", "S", player.x, player.y, 1)
-            entities.append(e)
-      elif c.lower() == "e" and len(entities) > 0:
-        for e in entities:
-          if e.x == player.x and e.y == player.y:
-            e.health -= 1
-            if e.health <= 0:
-              if e.name == "Salmon":
-                player.hunger += 1
-                entities.remove(e)
+      match c.lower():
+        case "w":
+          if player.y > 0:
+            player.y -= 1
+          elif game_map.up:
+            game_map = Map(game_map.up, dm) # Load upper map
+            player.y = len(game_map) - 1
+            player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bouds
+        case "s":
+          if player.y + 1 < len(game_map) - 1:
+            player.y += 1
+          elif game_map.down:
+            game_map = Map(game_map.down, dm)
+            player.y = 0
+            player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bouds
+        case "a":
+          if player.x > 0:
+            player.x -= 1
+          elif game_map.left:
+            game_map = Map(game_map.left, dm)
+            player.x = 0
+            player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
+        case "d":
+          if player.x + 1 < len(game_map[player.y]):
+            player.x += 1
+          elif game_map.right:
+            game_map = Map(game_map.right, dm)
+            player.x = len(game_map[player.y]) - 1
+            player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
+        case "m":
+          current_block = game_map[player.y][player.x]
+          if current_block == "T" and player.hunger > 0 and player.thrist > 0:
+            game_map[player.y][player.x] = "G"
+            player.inventory['wood'] += 1
+            player.hunger -= 1
+            player.thrist -= 1
+          elif current_block == "W":
+            game_map[player.y][player.x] = "R"
+            player.thrist += 1            
+            if random.getrandbits(2) == 0:
+              e = Entity("Salmon", "S", player.x, player.y, 1)
+              entities.append(e)
+        case "e":
+          if len(entities) > 0:
+            for e in entities:
+              if e.x == player.x and e.y == player.y:
+                e.health -= 1
+                if e.health <= 0:
+                  if e.name == "Salmon":
+                    player.hunger += 1
+                    entities.remove(e)
 
 if __name__ == "__main__":
   main()
