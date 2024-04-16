@@ -1,0 +1,6 @@
+C: assets/colors.txt, N: H, T: X
+X X X X X H H X X X X X
+X X H H H H H H H H X X
+X X X H W W W W H X X X
+X X X H W W W W H X X X
+X X X H W D D W H X X X

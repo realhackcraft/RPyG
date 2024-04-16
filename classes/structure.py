@@ -4,11 +4,15 @@ class Structure:
     
     self.structure_map = []
     self.color_dict = {}
+
+    print("---")
+    print(f"The path is: {self.path}")
+    print("---")
     
-    with open(path, "r") as file:
+    with open(self.path, "r") as file:
       for i, line in enumerate(file):
         if i == 0:
-          colors, structures, transparent = self.parse_structure_header(line)
+          colors, structures, transparent, symbol = self.parse_structure_header(line)
           continue
         self.structure_map.append(line.split())
 
@@ -19,6 +23,8 @@ class Structure:
       
       self.transparent = transparent
       self.structures = structures
+      self.symbol = symbol
+
       self.loaded_structures = []
 
       if self.structures:
@@ -35,7 +41,7 @@ class Structure:
   @staticmethod
   def parse_structure_header(text: str):
     args = text.split(", ") # Split the arguments with comma and space
-    colors = structures = transparent = "" 
+    colors = structures = transparent = symbol = "" 
 
     for arg in args:
       name = arg[0] # Name of the arg
@@ -43,11 +49,13 @@ class Structure:
       match name:
         case "C":
           colors = arg
-        case "S":
-          structures = arg.split(": ")
+        case "I":
+          structures = arg.split("; ")
         case "T":
           transparent = arg
+        case "S":
+          symbol = arg
 
-    return [colors, structures, transparent]
+    return [colors, structures, transparent, symbol]
 
 

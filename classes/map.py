@@ -103,7 +103,7 @@ class Map:
           right = arg
         case "C":
           colors = arg
-        case "S":
+        case "I":
           structures = arg.split(": ")
 
     return [up, down, left, right, colors, structures]

@@ -1,4 +1,0 @@
-D: asset/map.txt, C: asset/colors.txt
-G G G G G G
-G G G G G G
-G G G G G G
