@@ -1,0 +1,21 @@
+U: assets/map2.txt, C: assets/colors.txt
+G G G G G G G G G G G G G G G G G G G G
+G G W W W G G T G G G G G G W W W W G G
+G W W W W W W G G G G W W W W W W W W G
+G G W W W W G T G G G G W W W W W W G G
+G G G G G G G G G G G T G G W W W W W G
+G G G T G G G G G G G G G G G G G G G G
+G G G G G G G W W W W W T G G G G T G G
+G G G G G G W W W W W W W G G G G G G G
+G G G T G G G G W W W W G G G T G G G G
+G G G G G G G G G G G T G G G G G G G G
+G G T G G G G G T G G G G G T W W W W W
+W W W W W G G G G G G W W W W W W W W W
+W W W W W W W G G W W W W W W W G G G G
+G G G G G W W W W W W G T G W W W G T G
+G G G G G G G W W W G G G G G W W W W W
+G G G G G G G G G T G G G G G G G G G G
+G G G G G T W W W W W G G G T G G G G G
+T G G G W W W W W W W W G G G G G G G G
+G G G G W W W W W W W G G G G G T G G G
+G G G G G G G W W W G G G G G G G G G G

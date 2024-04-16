@@ -37,7 +37,7 @@ def clear_display():
 def main():
   player = Player(2, 3)
   entities = []
-  game_map = Map("./asset/map.txt", dm)
+  game_map = Map("./assets/map.txt", dm)
   last_user_input = ""
 
   print("\033[=3h")  # Set display mode to 80x25 with color support

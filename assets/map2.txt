@@ -1,0 +1,4 @@
+D: assets/map.txt, C: assets/colors.txt
+G G G G G G
+G G G G G G
+G G G G G G
