@@ -13,17 +13,19 @@ class Map:
     self.game_map: List[List[str]] = []
     self.color_dict = {}
 
+    up = down = left = right = colors = structures = None
+
     with open(path, "r") as file:
       for i, line in enumerate(file):
         if i == 0:
           up, down, left, right, colors, structures = self.parse_map_header(line)
           continue
         self.game_map.append(line.split())
-
-      with open(colors, 'r') as color_file:
-        for line in color_file:
-          key, value = line.strip().split(' ')
-          self.color_dict[key] = f"\033[{value}m"
+      if colors:
+        with open(colors, 'r') as color_file:
+          for line in color_file:
+            key, value = line.strip().split(' ')
+            self.color_dict[key] = f"\033[{value}m"
 
     self.dm = dm
 
@@ -40,9 +42,9 @@ class Map:
       if self.down:
         self.loaded_down = Map(self.down, dm, False)
       if self.left:
-        self.loaded_left = Map(self.down, dm, False)
+        self.loaded_left = Map(self.left, dm, False)
       if self.right:
-        self.loaded_right = Map(self.down, dm, False)
+        self.loaded_right = Map(self.right, dm, False)
       if self.structures:
         self.loaded_structures = []
         for structure in self.structures:
@@ -87,7 +89,7 @@ class Map:
   @staticmethod
   def parse_map_header(text: str):
     args = text.split(", ") # Split the arguments with comma and space
-    up = down = left = right = colors = structures = "" 
+    up = down = left = right = colors = structures = None 
 
     for arg in args:
       name = arg[0] # Name of the arg

@@ -3,23 +3,23 @@ class Structure:
     self.path = path
     
     self.structure_map = []
-    self.color_dict = {}
+    self.color_dict = {} 
 
-    print("---")
-    print(f"The path is: {self.path}")
-    print("---")
-    
+    colors = structures = transparent = symbol = None
+
+
     with open(self.path, "r") as file:
       for i, line in enumerate(file):
         if i == 0:
           colors, structures, transparent, symbol = self.parse_structure_header(line)
           continue
         self.structure_map.append(line.split())
-
-      with open(colors, 'r') as color_file:
-        for line in color_file:
-          key, value = line.strip().split(' ')
-          self.color_dict[key] = f"\033[{value}m"
+     
+      if colors:
+        with open(colors, 'r') as color_file:
+          for line in color_file:
+            key, value = line.strip().split(' ')
+            self.color_dict[key] = f"\033[{value}m"
       
       self.transparent = transparent
       self.structures = structures
