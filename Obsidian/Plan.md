@@ -7,12 +7,13 @@ kanban-plugin: basic
 ## Todo
 
 - [ ] [[Multi-tile structures]]
+- [ ] Caching maps to save load time
 - [ ] [[Random terrain generation]]
 - [ ] [[Title screen]]
 - [ ] Saving + loading
+- [ ] [[Support for custom keybinds]]
 - [ ] [[Storyline]]
 - [ ] Port to C++
-- [ ] Caching maps to save load time
 
 
 ## Doing
@@ -31,7 +32,6 @@ kanban-plugin: basic
 ## Canceled
 
 **Complete**
-- [x] Performance
 
 
 

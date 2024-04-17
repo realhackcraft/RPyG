@@ -11,11 +11,9 @@
             "id": "c6d8c86b8afe0627",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "Plan/Multi-tile structures.md",
-                "mode": "source",
-                "source": false
+                "file": "Plan.md"
               }
             }
           }
@@ -85,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Plan/Multi-tile structures.md",
+                "file": "Plan.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Plan/Multi-tile structures.md",
+                "file": "Plan.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -120,29 +118,27 @@
             }
           },
           {
-            "id": "40276170606030de",
+            "id": "f3c941247fa2debb",
             "type": "leaf",
             "state": {
-              "type": "outline",
-              "state": {
-                "file": "Plan/Multi-tile structures.md"
-              }
+              "type": "git-view",
+              "state": {}
             }
           },
           {
-            "id": "66070959d0f816fa",
+            "id": "cb04f0a677e60187",
             "type": "leaf",
             "state": {
-              "type": "advanced-tables-toolbar",
+              "type": "git-history-view",
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -155,13 +151,14 @@
       "workspaces:Manage workspace layouts": false
     }
   },
-  "active": "c6d8c86b8afe0627",
+  "active": "f3c941247fa2debb",
   "lastOpenFiles": [
     "Plan.md",
+    "Plan/Support for custom keybinds.md",
+    "Plan/Multi-tile structures.md",
     "Plan/Title screen.md",
     "Plan/Storyline.md",
     "Plan/Random terrain generation.md",
-    "Plan/Multi-tile structures.md",
     "Plan/Refactor Map loading into classes.md",
     "Untitled.md",
     "Plan",
