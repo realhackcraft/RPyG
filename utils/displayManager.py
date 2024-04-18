@@ -2,7 +2,7 @@ class DisplayManager:
     def __init__(self):
         self.buffer = ""
 
-    def add_to_buffer(self, string, end="\n"):
+    def add_to_buffer(self, string: str, end: str="\n"):
         self.buffer += string + end
 
     def flush_buffer(self):

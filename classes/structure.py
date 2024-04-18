@@ -1,9 +1,12 @@
+from typing import List, Dict, Tuple
+
+
 class Structure:
   def __init__(self, path: str):
     self.path = path
     
     self.structure_map = []
-    self.color_dict = {} 
+    self.color_dict = {}
 
     colors = structures = transparent = symbol = None
 
@@ -25,21 +28,28 @@ class Structure:
       self.structures = structures
       self.symbol = symbol
 
-      self.loaded_structures = []
+      self.loaded_structures: List[Structure] = []
 
       if self.structures:
         for structure in self.structures:
           self.loaded_structures.append(Structure(structure))
 
-      # Replace the transparent tiles with space
+      # Replace the transparent tiles with empty space
       for row in self.structure_map:
         for tile in row:
           if tile == self.transparent:
             tile = " "
 
-
+  def render_structure(self, map_size: Tuple[int], rendered_map: List[List]=[[]]) -> List[List[str]]:
+    # add the structure_map to the rendered map
+    
+    for s in self.loaded_structures:
+      rendered_map = s.render_structure(map_size, rendered_map)
+    
+    return rendered_map 
+    
   @staticmethod
-  def parse_structure_header(text: str):
+  def parse_structure_header(text: str) -> List[str | List[str]]:
     args = text.split(", ") # Split the arguments with comma and space
     colors = structures = transparent = symbol = "" 
 
