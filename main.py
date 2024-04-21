@@ -66,12 +66,12 @@ def main():
             player.y = len(game_map) - 1
             player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bounds
         case "s":
-          if player.y + 1 < len(game_map) - 1:
+          if player.y + 1 < len(game_map) :
             player.y += 1
           elif game_map.down:
             game_map = Map(game_map.down, dm)
             player.y = 0
-            player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bounds
+            player.x = min(len(game_map[player.y]) , player.x) # Make sure player.x is in bounds
         case "a":
           if player.x > 0:
             player.x -= 1
