@@ -7,7 +7,7 @@ from classes.map import Map
 from utils.displayManager import DisplayManager
 from utils.string import StringUtils
 
-dm = DisplayManager()
+display_manager = DisplayManager()
 
 def convert_arrow_keys(input_text: str):
   # Replace ANSI escape codes for arrow keys with corresponding WASD
@@ -32,12 +32,12 @@ def get_input():
     exit()
 
 def clear_display():
-  dm.add_to_buffer("\033[H\033[J")
+  display_manager.add_to_buffer("\033[H\033[J")
 
 def main():
   player = Player(2, 3)
   entities = []
-  game_map = Map("./assets/map.txt", dm)
+  game_map = Map("./assets/map.txt", display_manager)
   last_user_input = ""
 
   print("\033[=3h")  # Set display mode to 80x25 with color support
@@ -45,7 +45,7 @@ def main():
   while True:
     clear_display()
     game_map.render_map(player, entities, last_user_input)
-    dm.flush_buffer()
+    display_manager.flush_buffer()
 
     user_input = get_input()
 
@@ -62,28 +62,28 @@ def main():
           if player.y > 0:
             player.y -= 1
           elif game_map.up:
-            game_map = Map(game_map.up, dm) # Load upper map
+            game_map = Map(game_map.up, display_manager) # Load upper map
             player.y = len(game_map) - 1
             player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bounds
         case "s":
           if player.y + 1 < len(game_map) :
             player.y += 1
           elif game_map.down:
-            game_map = Map(game_map.down, dm)
+            game_map = Map(game_map.down, display_manager)
             player.y = 0
             player.x = min(len(game_map[player.y]) , player.x) # Make sure player.x is in bounds
         case "a":
           if player.x > 0:
             player.x -= 1
           elif game_map.left:
-            game_map = Map(game_map.left, dm)
+            game_map = Map(game_map.left, display_manager)
             player.x = 0
             player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
         case "d":
           if player.x + 1 < len(game_map[player.y]):
             player.x += 1
           elif game_map.right:
-            game_map = Map(game_map.right, dm)
+            game_map = Map(game_map.right, display_manager)
             player.x = len(game_map[player.y]) - 1
             player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
         case "m":
