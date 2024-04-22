@@ -3,7 +3,7 @@ description: Tell up about a bug that you spotted
 title: "[Bug]: "
 labels: ["bug", "triage"]
 body:
-  - type: dropdown
+- type: dropdown
   id: importance
   attributes:
     label: How important is this bug?
@@ -14,7 +14,7 @@ body:
       - Crash
   validations:
     required: true
-  - type: textarea
+- type: textarea
   id: repro
   attributes:
     label: Reproduction steps
@@ -27,13 +27,13 @@ body:
     render: bash
   validations:
     required: true
-  - type: textarea
+- type: textarea
     id: logs
     attributes:
       label: Relevant log output
       description: Please copy and paste any relevant log output.
       render: shell
-  - type: checkboxes
+- type: checkboxes
     id: terms
     attributes:
       label: Code of Conduct
