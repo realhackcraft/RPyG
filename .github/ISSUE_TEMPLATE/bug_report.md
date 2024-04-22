@@ -1,38 +1,38 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a report to tell us about bugs you spoted
 title: ''
 labels: ''
 assignees: ''
-
+body:
+- type: dropdown
+  id: importance
+  attributes:
+    label: How important/disruptive is this bug?
+    options:
+      - Slight annoyance
+      - Affects gamplay
+      - Crash
+  validations:
+    required: true
+- type: textarea
+  id: desc
+  attributes:
+    label: Description
+    description: "A clear and concise description of what the bug is."
+  validations:
+    required: true
+- type: textarea
+  id: repro
+  attributes:
+    label: Reproduction steps
+    description: "How do you trigger this bug? Please walk us through it step by step."
+    value: |
+      1.
+      2.
+      3.
+      ...
+    render: bash
+  validations:
+    required: true
 ---
-
-**Describe the bug**
-A clear and concise description of what the bug is.
-
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
