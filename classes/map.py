@@ -74,7 +74,7 @@ class Map:
     wood = p.inventory['wood']
     user_input = last_user_input.upper()
     self.dm.add_to_buffer("-" * os.get_terminal_size().columns)
-    stats = f"Wood: {wood}, Hunger: {p.hunger}, Thirst: {p.thrist}, Last Input: {user_input}"
+    stats = f"Wood: {wood}, Hunger: {p.hunger}/{p.max_hunger}, Thirst: {p.thirst}/{p.max_thirst}, Last Input: {user_input}"
     self.dm.add_to_buffer(stats)
     self.dm.add_to_buffer("-" * os.get_terminal_size().columns)
 

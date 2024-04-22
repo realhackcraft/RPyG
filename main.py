@@ -88,17 +88,17 @@ def main():
             player.y = min(len(game_map) - 1, player.y) # Make sure player.y is in bouds
         case "m":
           current_block = game_map[player.y][player.x]
-          if current_block == "T" and player.hunger > 0 and player.thrist > 0:
+          if current_block == "T" and player.hunger > 0 and player.thirst > 0:
             game_map[player.y][player.x] = "G"
             player.inventory['wood'] += 1
-            player.hunger -= 1
-            player.thrist -= 1
+            player.set_hunger(player.hunger - 1)
+            player.set_thirst(player.thirst - 1)
           elif current_block == "W":
-            game_map[player.y][player.x] = "R"
-            player.thrist += 1            
-            if random.getrandbits(2) == 0:
-              e = Entity("Salmon", "S", player.x, player.y, 1)
-              entities.append(e)
+            if player.set_thirst(player.thirst + 1):
+              game_map[player.y][player.x] = "R"
+              if random.getrandbits(2) == 0:
+                e = Entity("Salmon", "S", player.x, player.y, 1)
+                entities.append(e)
         case "e":
           if len(entities) > 0:
             for e in entities:
@@ -106,8 +106,8 @@ def main():
                 e.health -= 1
                 if e.health <= 0:
                   if e.name == "Salmon":
-                    player.hunger += 1
-                    entities.remove(e)
+                    if player.set_hunger(player.hunger + 1):
+                      entities.remove(e)
 
 if __name__ == "__main__":
   main()
