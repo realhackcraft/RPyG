@@ -1,6 +1,5 @@
 name: Bug Report
 description: Tell up about a bug that you spotted
-title: "[Bug]: "
 labels: ["bug", "triage"]
 body:
 - type: dropdown
