@@ -71,7 +71,7 @@ def main():
           elif game_map.down:
             game_map = Map(game_map.down, display_manager)
             player.y = 0
-            player.x = min(len(game_map[player.y]) , player.x) # Make sure player.x is in bounds
+            player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bounds
         case "a":
           if player.x > 0:
             player.x -= 1
