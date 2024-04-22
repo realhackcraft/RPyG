@@ -1,0 +1,29 @@
+name: Feature Request
+description: A request for a new feature
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Part
+      description: Which part of RPyG would this feature improve?
+      multiple: true
+      options:
+        - Gameplay
+        - Framework
+        - Performance
+        - Other (Please Specify)
+    validations:
+      required: true
+  - type: input
+    id: other
+    attributes:
+      label: Part (if you chose other)
+      description: If you chose other for the previous answer, type the part of the game that it would affect
+      
+  - type: textarea
+    id: feature
+    attributes:
+      label: Description
+      description: A description of the feature you want to see implemented
+    validations:
+      required: true
