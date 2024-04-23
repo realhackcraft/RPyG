@@ -1,6 +1,7 @@
 import random
 import re
 
+from classes.bear import Bear
 from classes.entity import Entity
 from classes.player import Player
 from classes.map import Map
@@ -39,6 +40,10 @@ def main():
   entities = []
   game_map = Map("./assets/map.txt", display_manager)
   last_user_input = ""
+  
+  ### TEST ###
+  entities.append(Bear(10, 10))
+  ### END TEST ###
 
   print("\033[=3h")  # Set display mode to 80x25 with color support
 
@@ -46,6 +51,12 @@ def main():
     clear_display()
     game_map.render_map(player, entities, last_user_input)
     display_manager.flush_buffer()
+
+    for e in entities:
+      if type(e) is Bear:
+        e.tick(player)
+      else:
+        e.tick()
 
     user_input = get_input()
 
