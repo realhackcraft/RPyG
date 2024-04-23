@@ -49,9 +49,10 @@ class Structure:
     return rendered_map 
     
   @staticmethod
-  def parse_structure_header(text: str) -> List[str | List[str]]:
+  def parse_structure_header(text: str) -> Tuple[str, List[str], str, str]:
     args = text.split(", ") # Split the arguments with comma and space
-    colors = structures = transparent = symbol = "" 
+    colors = transparent = symbol = "" 
+    structures = []
 
     for arg in args:
       name = arg[0] # Name of the arg
@@ -66,6 +67,6 @@ class Structure:
         case "S":
           symbol = arg
 
-    return [colors, structures, transparent, symbol]
+    return (colors, structures, transparent, symbol)
 
 
