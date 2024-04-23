@@ -14,16 +14,14 @@ class Bear(Entity):
   def tick(self, *args: Any):
     player = args[0]
     map = args[1]
+
     if type(player) is not Player:
       return
 
     if type(map) is not Map:
       return
 
-    if self.x == player.x and self.y == player.y:
-      player.health -= self.damage
-      # Check dist beteewn player and self is greater than 5
-    elif Math.distance((player.x, player.y), (self.x, self.y)) > 5:
+    if Math.distance((player.x, player.y), (self.x, self.y)) > 5:
       self.x += random.randint(-1, 1)
       self.y += random.randint(-1, 1)
       # Check if the bear is now out of bound (BOoB)
@@ -33,9 +31,12 @@ class Bear(Entity):
         self.y = 0
 
       if self.x >= len(map[self.y]):
-        self.x = len(map[self.y])
+        self.x = len(map[self.y]) - 1
       elif self.x < 0:
         self.x = 0
+      # Check dist beteewn player and self is greater than 5
+    elif self.x == player.x and self.y == player.y:
+      player.health -= self.damage
     else:
       # Simulate bear movement
       left_x = Math.distance((player.x, player.y), (self.x - 1, self.y))

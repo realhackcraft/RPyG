@@ -12,6 +12,7 @@ class Map:
     self.path = path  
     self.game_map: List[List[str]] = []
     self.color_dict = {}
+    self.entities = []
 
     up = down = left = right = colors = structures = None
 
@@ -35,21 +36,22 @@ class Map:
     self.right = right
 
     self.structures = structures
-
     if loadPath:
+      self.load_path()
+
+  def load_path(self):
       if self.up:
-        self.loaded_up = Map(self.up, dm, False)
+        self.loaded_up = Map(self.up, self.dm, False)
       if self.down:
-        self.loaded_down = Map(self.down, dm, False)
+        self.loaded_down = Map(self.down, self.dm, False)
       if self.left:
-        self.loaded_left = Map(self.left, dm, False)
+        self.loaded_left = Map(self.left, self.dm, False)
       if self.right:
-        self.loaded_right = Map(self.right, dm, False)
+        self.loaded_right = Map(self.right, self.dm, False)
       if self.structures:
         self.loaded_structures = []
         for structure in self.structures:
           self.loaded_structures.append(Structure(structure))
-        
 
   def render_map(self, player: Player, entities: List[Entity], last_user_input: str):
     self.display_map = deepcopy(self.game_map)

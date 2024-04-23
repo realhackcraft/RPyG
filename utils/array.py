@@ -1,5 +1,7 @@
 from typing import List, Tuple
 
+from copy import deepcopy
+
 class ArrayUtils:
   @staticmethod
   def join_2d_arrays(matrix1: List[List[str]], matrix2: List[List[str]], offsets: Tuple[int, int]=(0,0)) -> List[List[str]]:
@@ -12,7 +14,7 @@ class ArrayUtils:
         raise ValueError("Matrix 2 dimensions with offsets are larger than Matrix 1 dimensions.")
 
     # Create a new list to hold the overlaid matrix
-    overlaid_matrix = [row[:] for row in matrix1]  # Copy Matrix 1
+    overlaid_matrix = deepcopy(matrix1) # Copy Matrix 1
 
     # Overlay Matrix 2 on top of Matrix 1 with offsets
     for i in range(rows2):
