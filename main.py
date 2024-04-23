@@ -74,10 +74,10 @@ def main():
           if player.y > 0:
             player.y -= 1
           elif game_map.loaded_up:
-            temp_game_map = game_map
+            temp_game_map = game_map # This is ducplicated and not referenced
             game_map = game_map.loaded_up # Load upper map
             game_map.load_path() # Only load the surrounding maps once it is loaded
-            game_map.loaded_down = temp_game_map
+            game_map.loaded_down = temp_game_map # This is the old game_map
 
             player.y = len(game_map) - 1
             player.x = min(len(game_map[player.y]) - 1, player.x) # Make sure player.x is in bounds
