@@ -54,7 +54,7 @@ def main():
 
     for e in entities:
       if type(e) is Bear:
-        e.tick(player)
+        e.tick(player, game_map)
       else:
         e.tick()
 
