@@ -1,5 +1,6 @@
 name: Feature Request
 description: A request for a new feature
+labels: enhancements
 body:
   - type: dropdown
     id: area
