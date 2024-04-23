@@ -48,11 +48,15 @@ class Bear(Entity):
       minimum_distance = min(left_x, right_x, up_y, down_y)
 
       # Move
+      multiplier = 1
+      if random.getrandbits(3) == 0:
+        multiplier = -1
+
       if minimum_distance == left_x:
-        self.x -= 1
+        self.x -= multiplier * 1
       elif minimum_distance == right_x:
-        self.x += 1
+        self.x += multiplier * 1
       elif minimum_distance == up_y:
-        self.y -= 1
+        self.y -= multiplier * 1
       else:
-        self.y += 1
+        self.y += multiplier * 1
