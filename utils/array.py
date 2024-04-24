@@ -4,7 +4,7 @@ from copy import deepcopy
 
 class ArrayUtils:
   @staticmethod
-  def join_2d_arrays(matrix1: List[List[str]], matrix2: List[List[str]], offsets: Tuple[int, int]=(0,0)) -> List[List[str]]:
+  def join_2d_arrays(matrix1: List[List[str]], matrix2: List[List[str]], offsets: Tuple[int, int]=(0,0), transparent: str="") -> List[List[str]]:
     # Get the dimensions of the matrices
     rows1, cols1 = len(matrix1), len(matrix1[0])
     rows2, cols2 = len(matrix2), len(matrix2[0])
@@ -19,6 +19,6 @@ class ArrayUtils:
     # Overlay Matrix 2 on top of Matrix 1 with offsets
     for i in range(rows2):
         for j in range(cols2):
-            overlaid_matrix[i + offsets[1]][j + offsets[0]] = matrix2[i][j]
+            overlaid_matrix[i + offsets[1]][j + offsets[0]] = matrix2[i][j] if transparent != matrix2[i][j] else matrix1[i][j]
 
     return overlaid_matrix 
