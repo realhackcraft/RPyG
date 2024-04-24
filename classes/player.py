@@ -13,6 +13,7 @@ class Player(Entity):
     self.inventory = OrderedDict()
     
     self.inventory["wood"] = 0
+    self.inventory["gun"] = 1
 
   def set_hunger(self, hunger: int) -> bool:
     if hunger > self.max_hunger:

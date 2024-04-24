@@ -50,7 +50,7 @@ class Bear(Entity):
       # Move
       multiplier = 1
       if random.getrandbits(3) == 0:
-        multiplier = -1
+        multiplier = 0
 
       if minimum_distance == left_x:
         self.x -= multiplier * 1

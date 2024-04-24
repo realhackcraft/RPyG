@@ -4,7 +4,7 @@ import re
 from classes.bear import Bear
 from classes.entity import Entity
 from classes.player import Player
-from classes.map import Map, deepcopy
+from classes.map import Map
 from utils.displayManager import DisplayManager
 from utils.string import StringUtils
 
@@ -41,10 +41,9 @@ def main():
   print("\033[=3h")  # Set display mode to 80x25 with color support
 
   mode = "NORMAL"
+  inventory_mode_selected_item_index = 0
 
   while True:
-
-    inventory_mode_selected_item_index = 0
     clear_display()
     game_map.render_map(player, game_map.entities, last_user_input)
     display_manager.flush_buffer()
@@ -57,7 +56,7 @@ def main():
         user_input = sanitize_ansi_escape(input("> "))
       elif mode == "INVENTORY":
         item = list(player.inventory.items())[inventory_mode_selected_item_index]
-        user_input = sanitize_ansi_escape(input(f"{item[0]} - {item[1]} > "))
+        user_input = sanitize_ansi_escape(input(f"{item[0]} - {item[1]} ({inventory_mode_selected_item_index}) > "))
     except KeyboardInterrupt:
       exit()
 
@@ -125,7 +124,7 @@ def main():
             current_block = game_map[player.y][player.x]
             if current_block == "T" and player.hunger > 0 and player.thirst > 0:
               game_map[player.y][player.x] = "G"
-              player.inventory['wood'] += 1
+              player.inventory["wood"] += 1
               player.set_hunger(player.hunger - 1)
               player.set_thirst(player.thirst - 1)
             elif current_block == "W":
@@ -139,8 +138,10 @@ def main():
               for e in game_map.entities:
                 if e.x == player.x and e.y == player.y:
                   e.health -= 1
-                  if e.health <= 0:
-                    if e.name == "Salmon":
+                  if e.health > 0:
+                    return
+                  match e.name:
+                    case "Salmon":
                       if player.set_hunger(player.hunger + 1):
                         game_map.entities.remove(e)
           case "i":
@@ -150,9 +151,14 @@ def main():
           case "w":
             if inventory_mode_selected_item_index - 1 >= 0:
               inventory_mode_selected_item_index -= 1
+            else:
+              # Wrap around the inventory of it is exeeded
+              inventory_mode_selected_item_index = len(player.inventory) - 1
           case "s":
-            if inventory_mode_selected_item_index + 1 > len(player.inventory):
+            if inventory_mode_selected_item_index + 1 < len(player.inventory):
               inventory_mode_selected_item_index += 1
+            else:
+              inventory_mode_selected_item_index = 0
           case "q":
             mode = "NORMAL"
 
