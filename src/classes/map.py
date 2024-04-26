@@ -13,6 +13,7 @@ class Map:
     self.game_map: List[List[str]] = []
     self.color_dict = {}
     self.entities = []
+    self.loaded_up = self.loaded_down = self.loaded_left = self.loaded_right = None
 
     up = down = left = right = colors = structures = None
 
