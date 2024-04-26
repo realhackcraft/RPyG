@@ -48,7 +48,6 @@ def main():
     game_map.render_map(player, game_map.entities, last_user_input)
     display_manager.flush_buffer()
 
-
     user_input = ""
 
     try:
