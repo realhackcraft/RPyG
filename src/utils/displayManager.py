@@ -1,3 +1,6 @@
+"""
+Manage the display buffer to prevent stuttering
+"""
 class DisplayManager:
     def __init__(self):
         self.buffer = ""

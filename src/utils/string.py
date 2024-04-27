@@ -1,5 +1,8 @@
 import re
 
+"""
+Utilities to manipulate strings
+"""
 class StringUtils:
   @staticmethod
   def split_string_with_capitals(s: str):

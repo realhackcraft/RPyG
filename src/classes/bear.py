@@ -5,7 +5,9 @@ from classes.player import Player
 from classes.map import Map
 from utils.math import Math
 
-
+"""
+The bear entity
+"""
 class Bear(Entity):
   def __init__(self, x: int, y: int):
     super().__init__("Bear", "B", x, y, 5)

@@ -1,6 +1,8 @@
-from typing import List, Dict, Tuple
+from typing import List, Tuple
 
-
+"""
+Classes for structures that are overlayed on top of maps
+"""
 class Structure:
   def __init__(self, path: str):
     self.path = path

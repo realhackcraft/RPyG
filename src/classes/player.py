@@ -2,7 +2,9 @@ from collections import OrderedDict
 
 from classes.entity import Entity
 
-
+"""
+The player class
+"""
 class Player(Entity):
   def __init__(self, x: int, y: int):
     super().__init__("Player", "@", x, y, 5)

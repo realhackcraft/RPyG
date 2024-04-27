@@ -1,8 +1,15 @@
+"""
+Utilities for manipulating arrays or 2d matrices
+"""
+
 from typing import List, Tuple
 
 from copy import deepcopy
 
 class ArrayUtils:
+  """
+  Merge 2 2d arrays into one by overlaying matrix2 to matrix1
+  """
   @staticmethod
   def join_2d_arrays(matrix1: List[List[str]], matrix2: List[List[str]], offsets: Tuple[int, int]=(0,0), transparent: str="") -> List[List[str]]:
     # Get the dimensions of the matrices

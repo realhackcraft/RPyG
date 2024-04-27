@@ -7,6 +7,9 @@ from classes.player import Player
 from classes.structure import Structure
 from utils.displayManager import DisplayManager
 
+"""
+The map class for the game map
+"""
 class Map:
   def __init__(self, path: str, dm: DisplayManager, loadPath: bool = True):
     self.path = path  

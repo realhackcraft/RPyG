@@ -1,3 +1,6 @@
+"""
+Utilities related to math
+"""
 from math import atan2, sqrt
 from typing import Tuple
 
