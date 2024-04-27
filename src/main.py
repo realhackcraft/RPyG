@@ -100,7 +100,7 @@ def main():
           case "a":
             if player.x > 0:
               player.x -= 1
-            elif game_map.left:
+            elif game_map.loaded_left:
               temp_game_map = game_map
               game_map = game_map.loaded_left
               game_map.load_path()
@@ -111,7 +111,7 @@ def main():
           case "d":
             if player.x + 1 < len(game_map[player.y]):
               player.x += 1
-            elif game_map.right:
+            elif game_map.loaded_right:
               temp_game_map = game_map
               game_map = game_map.loaded_right
               game_map.load_path()
