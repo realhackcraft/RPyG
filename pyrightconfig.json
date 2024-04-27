@@ -1,17 +1,13 @@
 {
-    "include" : [
-        "src"
-    ],
-    "exclude" : [
-        "**/__pycache__"
-    ],
- 
-    "pythonVersion" : "3.11.6",
-    "pythonPlatform" : "Linux",
- 
-    "reportMissingImports" : true,
-    "reportMissingModuleSource" : true,
-    "reportMissingParameterType" : true,
- 
-    "strict" : true
+  "include": ["src"],
+  "exclude": ["**/__pycache__"],
+
+  "pythonVersion": "3.11.6",
+  "pythonPlatform": "Linux",
+
+  "reportMissingImports": true,
+  "reportMissingModuleSource": true,
+  "reportMissingParameterType": true,
+
+  "strict": true
 }
