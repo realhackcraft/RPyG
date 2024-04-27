@@ -1,9 +1,9 @@
 """
-Utilities related to math
+Math related utilities
 """
+
 from math import atan2, sqrt
 from typing import Tuple
-
 
 class Math:
   @staticmethod

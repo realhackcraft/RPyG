@@ -1,8 +1,9 @@
-import re
-
 """
 Utilities to manipulate strings
 """
+
+import re
+
 class StringUtils:
   @staticmethod
   def split_string_with_capitals(s: str):

@@ -1,8 +1,9 @@
-from typing import List, Tuple
-
 """
 Classes for structures that are overlayed on top of maps
 """
+
+from typing import List, Tuple
+
 class Structure:
   def __init__(self, path: str):
     self.path = path
