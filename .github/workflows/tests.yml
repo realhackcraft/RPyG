@@ -20,7 +20,9 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        touch .pylintrc
+        printf "indent-string=\"    \"" >> .pylintrc
+        pylint --rcfile .pylintrc $(git ls-files '*.py')
     - name: Run unit tests
       run: |
         python -m unittest
