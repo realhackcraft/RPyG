@@ -10,6 +10,7 @@ from classes.entity import Entity
 from classes.player import Player
 from classes.structure import Structure
 from utils.displayManager import DisplayManager
+from utils.file import FileUtils
 
 class Map:
   def __init__(self, path: str, dm: DisplayManager, loadPath: bool = True):
@@ -28,11 +29,7 @@ class Map:
           continue
         self.game_map.append(line.split())
       if colors:
-        with open(colors, 'r') as color_file:
-          for line in color_file:
-            key, value = line.strip().split(' ')
-            self.color_dict[key] = f"\033[{value}m"
-
+        self.color_dict = FileUtils.parse_colors(colors)
     self.dm = dm
 
     self.up = up
