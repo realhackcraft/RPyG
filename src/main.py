@@ -3,6 +3,7 @@ import re
 
 from classes.bear import Bear
 from classes.entity import Entity
+from classes.enums.mode import Mode
 from classes.map import Map
 from classes.player import Player
 from utils.displayManager import DisplayManager
@@ -44,7 +45,7 @@ def main():
 
     print("\033[=3h")  # Set display mode to 80x25 with color support
 
-    mode = "NORMAL"
+    mode = Mode.NORMAL
     inventory_mode_selected_item_index = 0
 
     while True:
@@ -55,9 +56,9 @@ def main():
         user_input = ""
 
         try:
-            if mode == "NORMAL":
+            if mode == Mode.NORMAL:
                 user_input = sanitize_ansi_escape(input("> "))
-            elif mode == "INVENTORY":
+            elif mode == Mode.INVENTORY:
                 item = list(player.inventory.items())[
                     inventory_mode_selected_item_index
                 ]
@@ -77,7 +78,7 @@ def main():
         commands = StringUtils.split_string_with_capitals(user_input)
 
         for c in commands:
-            if mode == "NORMAL":
+            if mode == Mode.NORMAL:
                 for e in game_map.entities:
                     if type(e) is Bear:
                         e.tick(player, game_map)
@@ -170,8 +171,8 @@ def main():
                                             if player.set_hunger(player.hunger + 1):
                                                 game_map.entities.remove(e)
                     case "i":
-                        mode = "INVENTORY"
-            elif mode == "INVENTORY":
+                        mode = Mode.INVENTORY
+            elif mode == Mode.INVENTORY:
                 match c.lower():
                     case "w":
                         if inventory_mode_selected_item_index - 1 >= 0:
@@ -189,7 +190,7 @@ def main():
                         else:
                             inventory_mode_selected_item_index = 0
                     case "q":
-                        mode = "NORMAL"
+                        mode = Mode.NORMAL
 
 
 if __name__ == "__main__":
