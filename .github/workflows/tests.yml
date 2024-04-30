@@ -18,6 +18,7 @@ jobs:
       run: |
         cd src
         python -m unittest discover
+        cd ..
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
