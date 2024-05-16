@@ -8,7 +8,7 @@ from utils.file import FileUtils
 
 
 class Structure:
-    def __init__(self, path: str):
+    def __init__(self, path: str) -> None:
         self.path = path
 
         self.structure_map = []

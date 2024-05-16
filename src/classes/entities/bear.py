@@ -11,7 +11,7 @@ from utils.math import Math
 
 
 class Bear(Entity):
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         super().__init__("Bear", "B", x, y, 5)
         self.damage = 2
 

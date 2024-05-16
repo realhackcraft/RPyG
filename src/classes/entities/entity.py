@@ -6,7 +6,7 @@ from typing import Any
 
 
 class Entity:
-    def __init__(self, name: str, symbol: str, x: int, y: int, health: int):
+    def __init__(self, name: str, symbol: str, x: int, y: int, health: int) -> None:
         self.name = name
         self.symbol = symbol
         self.x = x

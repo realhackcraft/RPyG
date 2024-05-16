@@ -14,7 +14,7 @@ from utils.file import FileUtils
 
 
 class Map:
-    def __init__(self, path: str, dm: DisplayManager, loadPath: bool = True):
+    def __init__(self, path: str, dm: DisplayManager, loadPath: bool = True) -> None:
         self.path = path
         self.game_map: List[List[str]] = []
         self.color_dict = {}
