@@ -1,11 +1,11 @@
 import random
 import re
 
-from classes.bear import Bear
-from classes.entity import Entity
+from classes.entities.bear import Bear
+from classes.entities.entity import Entity
 from classes.enums.mode import Mode
 from classes.map import Map
-from classes.player import Player
+from classes.entities.player import Player
 from utils.displayManager import DisplayManager
 from utils.string import StringUtils
 

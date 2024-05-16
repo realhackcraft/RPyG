@@ -4,7 +4,7 @@ The player class
 
 from collections import OrderedDict
 
-from classes.entity import Entity
+from classes.entities.entity import Entity
 
 
 class Player(Entity):

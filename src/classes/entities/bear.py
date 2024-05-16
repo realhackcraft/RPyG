@@ -4,9 +4,9 @@ The bear entity
 
 import random
 
-from classes.entity import Any, Entity
+from classes.entities.entity import Any, Entity
+from classes.entities.player import Player
 from classes.map import Map
-from classes.player import Player
 from utils.math import Math
 
 

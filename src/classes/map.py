@@ -6,8 +6,8 @@ import os
 from copy import deepcopy
 from typing import List
 
-from classes.entity import Entity
-from classes.player import Player
+from classes.entities.entity import Entity
+from classes.entities.player import Player
 from classes.structure import Structure
 from utils.displayManager import DisplayManager
 from utils.file import FileUtils
