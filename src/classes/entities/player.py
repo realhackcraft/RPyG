@@ -2,9 +2,10 @@
 The player class
 """
 
-from collections import OrderedDict
-
 from classes.entities.entity import Entity
+from classes.inventory import Inventory
+from classes.items.gun import Gun
+from classes.items.wood import Wood
 
 
 class Player(Entity):
@@ -14,10 +15,10 @@ class Player(Entity):
         self.thirst = 3
         self.max_hunger = 10
         self.max_thirst = 10
-        self.inventory = OrderedDict()
+        self.inventory = Inventory()
 
-        self.inventory["wood"] = 0
-        self.inventory["gun"] = 1
+        self.inventory.add_item(Wood(0))
+        self.inventory.add_item(Gun())
 
     def set_hunger(self, hunger: int) -> bool:
         if hunger > self.max_hunger:

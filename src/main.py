@@ -4,6 +4,7 @@ import re
 from classes.entities.bear import Bear
 from classes.entities.entity import Entity
 from classes.enums.mode import Mode
+from classes.items.wood import Wood
 from classes.map import Map
 from classes.entities.player import Player
 from utils.displayManager import DisplayManager
@@ -59,12 +60,12 @@ def main():
             if mode == Mode.NORMAL:
                 user_input = sanitize_ansi_escape(input("> "))
             elif mode == Mode.INVENTORY:
-                item = list(player.inventory.items())[
+                item = player.inventory[
                     inventory_mode_selected_item_index
                 ]
                 user_input = sanitize_ansi_escape(
                     input(
-                        f"{item[0]} - {item[1]} ({inventory_mode_selected_item_index}) > "
+                        f"{item.name} - {item.quantity} > "
                     )
                 )
         except KeyboardInterrupt:
@@ -150,7 +151,7 @@ def main():
                             and player.thirst > 0
                         ):
                             game_map[player.y][player.x] = "G"
-                            player.inventory["wood"] += 1
+                            player.inventory.add_item(Wood())                           
                             player.set_hunger(player.hunger - 1)
                             player.set_thirst(player.thirst - 1)
                         elif current_block == "W":
