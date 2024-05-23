@@ -18,6 +18,7 @@ class ArrayUtils:
         offsets: Tuple[int, int] = (0, 0),
         transparent: str = "",
     ) -> List[List[str]]:
+        """Overlays two 2d arrays on top of one another"""
         # Get the dimensions of the matrices
         rows1, cols1 = len(matrix1), len(matrix1[0])
         rows2, cols2 = len(matrix2), len(matrix2[0])

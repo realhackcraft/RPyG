@@ -4,8 +4,9 @@ The bear entity
 
 import random
 
-from classes.entities.entity import Any, Entity
-from classes.entities.player import Player
+from typing import Any
+
+from classes.entities.entity import Entity
 from classes.map import Map
 from utils.math import Math
 
@@ -17,25 +18,25 @@ class Bear(Entity):
 
     def tick(self, *args: Any):
         player = args[0]
-        map = args[1]
+        game_map = args[1]
 
-        if type(player) is not Player:
-            return
+        # if type(player) is not Player:
+        #     return
 
-        if type(map) is not Map:
+        if not isinstance(game_map, Map):
             return
 
         if Math.distance((player.x, player.y), (self.x, self.y)) > 5:
             self.x += random.randint(-1, 1)
             self.y += random.randint(-1, 1)
             # Check if the bear is now out of bound (BOoB)
-            if self.y >= len(map):
-                self.y = len(map) - 1
+            if self.y >= len(game_map):
+                self.y = len(game_map) - 1
             elif self.y < 0:
                 self.y = 0
 
-            if self.x >= len(map[self.y]):
-                self.x = len(map[self.y]) - 1
+            if self.x >= len(game_map[self.y]):
+                self.x = len(game_map[self.y]) - 1
             elif self.x < 0:
                 self.x = 0
             # Check dist beteewn player and self is greater than 5

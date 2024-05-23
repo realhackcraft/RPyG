@@ -4,7 +4,6 @@ The map class for the game map
 
 import os
 from copy import deepcopy
-from typing import List
 
 from classes.entities.entity import Entity
 from classes.entities.player import Player
@@ -16,9 +15,10 @@ from utils.file import FileUtils
 class Map:
     def __init__(self, path: str, dm: DisplayManager, loadPath: bool = True) -> None:
         self.path = path
-        self.game_map: List[List[str]] = []
+        self.game_map: list[list[str]] = []
         self.color_dict = {}
         self.entities = []
+        self.display_map: None|list[list[str]] = None
         self.loaded_up = self.loaded_down = self.loaded_left = self.loaded_right = None
 
         up = down = left = right = colors = structures = None
@@ -58,7 +58,7 @@ class Map:
             for structure in self.structures:
                 self.loaded_structures.append(Structure(structure))
 
-    def render_map(self, player: Player, entities: List[Entity], last_user_input: str):
+    def render_map(self, player: Player, entities: list[Entity], last_user_input: str):
         self.display_map = deepcopy(self.game_map)
 
         for e in entities:
@@ -71,6 +71,8 @@ class Map:
         self.print_map()
 
     def print_map(self):
+        if self.display_map is None:
+            return
         for row in self.display_map:
             self.dm.add_to_buffer(
                 " ".join([f"{self.color_dict[tile]}{tile}\033[0m" for tile in row])
@@ -84,7 +86,7 @@ class Map:
         self.dm.add_to_buffer(stats)
         self.dm.add_to_buffer("-" * os.get_terminal_size().columns)
 
-    def print_under(self, entities: List[Entity], player: Player):
+    def print_under(self, entities: list[Entity], player: Player):
         self.dm.add_to_buffer("-" * os.get_terminal_size().columns)
         display_text = f"Block: {self.game_map[player.y][player.x]}, Entities: "
         for e in entities:

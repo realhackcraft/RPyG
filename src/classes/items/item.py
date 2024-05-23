@@ -3,5 +3,10 @@ class Item:
         self.name = type(self).__name__
         self.quantity = quantity
 
+
     def change_quantity(self, quantity: int):
         self.quantity += quantity
+
+    
+    def use(self) -> None:
+        raise NotImplementedError()
